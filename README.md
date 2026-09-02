@@ -1,17 +1,25 @@
 # AI Research Demo
 
-My first AI research automation project.
+AI research reproduction and experimentation project.
 
 ## Goal
 
-Paper reproduction → baseline → improvement → experiment → paper writing
+Paper reproduction → Baseline → Improvement → Experiment → Analysis
 
 ## Structure
 
-- paper: papers and PDFs
-- code: source code
-- data: datasets
-- experiments: experiment configs
-- results: experiment outputs
-- figures: generated figures
-- notes: research notes
+- `code/` — Source code
+- `data/` — Datasets
+- `experiments/` — Experiment records
+- `environment.yml` — Experimental environment
+- `git-push.bat` — One-click GitHub commit and push
+
+## Workflow
+
+Paper → Reproduce Baseline → Improve → Experiment → Analyze Results
+
+## Notes
+
+- Paper PDFs are managed in Zotero.
+- Paper reading notes and research knowledge are managed in AI-Research-Knowledge.
+- This repository focuses on code, data, and experiments.
