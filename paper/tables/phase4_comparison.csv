@@ -1,0 +1,4 @@
+phase,run_id,display_name,model,preact,residual,option,best_test_error_pct,best_epoch,train_error_at_best_pct,final_train_error_pct,test_loss_at_best,final_train_loss,last_test_error_pct,param_count,duration,duration_sec,artifact_root
+phase2,plain20_08_49_22,Plain-20,CifarResNet-20-P-N,False,False,,9.68,132,1.39,1.16,0.4015,0.0365,9.84,270410,01:04:19,3859,experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22
+phase2,resnet20a_09_53_41,ResNet-20-A,CifarResNet-20-R-A,False,True,A,8.41,132,0.91,0.72,0.3501,0.0253,8.58,270410,01:03:13,3794,experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41
+phase3,preact_resnet20a_16_23_57,PreAct-ResNet-20-A,CifarPreActResNet-20-R-A,True,True,A,9.47,128,1.81,1.45,0.4003,0.0435,9.76,270314,01:11:17,4277,experiments/runs/phase3/preact_resnet20a/CifarPreActResNet-20-R-A/09_03_2026/16_23_57

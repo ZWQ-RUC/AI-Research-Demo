@@ -1,0 +1,25 @@
+{
+  "phase": "phase2",
+  "experiment_id": "baseline",
+  "run_id": "plain20_08_49_22",
+  "model": "CifarResNet-20-P-N",
+  "display_name": "Plain-20",
+  "artifact_root": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22",
+  "canonical": true,
+  "status": "completed",
+  "primary_metric": "best_test_error",
+  "best_test_error": 0.09680000000000044,
+  "best_test_error_pct": 9.68,
+  "best_epoch": 132,
+  "final_train_error": 0.01160000000000283,
+  "final_train_error_pct": 1.16,
+  "epochs_recorded": 160,
+  "eval_points": 40,
+  "weights_best": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22/weights/best.pt",
+  "curves": {
+    "train_errors": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22/train_errors.npy",
+    "test_errors": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22/test_errors.npy",
+    "train_losses": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22/train_losses.npy",
+    "test_losses": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22/test_losses.npy"
+  }
+}

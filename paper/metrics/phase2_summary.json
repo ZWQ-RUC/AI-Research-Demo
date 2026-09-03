@@ -1,0 +1,22 @@
+{
+  "phase": "phase2",
+  "status": "partially_reproduced",
+  "primary_claim": "ResNet-20-A test error lower than Plain-20; close to paper Table 6 ResNet-20 (8.75%)",
+  "tolerance_pp": 1.0,
+  "results": [
+    {
+      "model": "Plain-20",
+      "observed_best_test_error_pct": 9.68,
+      "repo_reference_pct": 9.26,
+      "paper_reference_pct": null
+    },
+    {
+      "model": "ResNet-20-A",
+      "observed_best_test_error_pct": 8.41,
+      "repo_reference_pct": 8.64,
+      "paper_reference_pct": 8.75
+    }
+  ],
+  "residual_advantage_pp": 1.27,
+  "manifest": "experiments/manifests/phase2_baseline.json"
+}

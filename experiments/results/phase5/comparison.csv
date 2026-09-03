@@ -1,0 +1,6 @@
+display_name,phase,status,failure_mode,best_test_error_pct,best_epoch,train_error_at_best_pct,final_train_error_pct,param_count,duration,block,artifact_root
+Plain-20,phase2,completed,,9.68,132,1.39,1.16,270410,01:04:19,Conv -> BN -> ReLU -> Conv -> BN -> Add -> ReLU (no shortcut),experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22
+ResNet-20-A,phase2,completed,,8.41,132,0.91,0.72,270410,01:03:13,Conv -> BN -> ReLU -> Conv -> BN -> Add -> ReLU,experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41
+PreAct-ResNet-20-A,phase3,completed,,9.47,128,1.81,1.45,270314,01:11:17,BN -> ReLU -> Conv -> BN -> ReLU -> Conv -> Add,experiments/runs/phase3/preact_resnet20a/CifarPreActResNet-20-R-A/09_03_2026/16_23_57
+Ablation-A,phase5,completed,,8.32,124,1.24,0.9,269738,01:08:53,Conv -> BN -> ReLU -> Conv -> Add,experiments/runs/phase5/ablation_a/CifarPreActAblationA-20-R-A/09_03_2026/18_59_29
+Ablation-B,phase5,failed,numerical_instability,,,,,269642,stopped ~epoch 20,BN -> ReLU -> Conv -> Conv -> Add,experiments/runs/phase5/ablation_b/CifarPreActAblationB-20-R-A/09_03_2026/20_08_23

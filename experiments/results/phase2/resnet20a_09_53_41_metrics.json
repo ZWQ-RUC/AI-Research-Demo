@@ -1,0 +1,25 @@
+{
+  "phase": "phase2",
+  "experiment_id": "baseline",
+  "run_id": "resnet20a_09_53_41",
+  "model": "CifarResNet-20-R-A",
+  "display_name": "ResNet-20-A",
+  "artifact_root": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41",
+  "canonical": true,
+  "status": "completed",
+  "primary_metric": "best_test_error",
+  "best_test_error": 0.08410000000000006,
+  "best_test_error_pct": 8.41,
+  "best_epoch": 132,
+  "final_train_error": 0.007220000000001892,
+  "final_train_error_pct": 0.72,
+  "epochs_recorded": 160,
+  "eval_points": 40,
+  "weights_best": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41/weights/best.pt",
+  "curves": {
+    "train_errors": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41/train_errors.npy",
+    "test_errors": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41/test_errors.npy",
+    "train_losses": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41/train_losses.npy",
+    "test_losses": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41/test_losses.npy"
+  }
+}

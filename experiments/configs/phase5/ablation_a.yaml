@@ -1,0 +1,35 @@
+# Phase 5 Ablation A — drop first BN+ReLU from PreAct block
+# Full PreAct: BN -> ReLU -> Conv -> BN -> ReLU -> Conv -> Add
+# Ablation A:  Conv -> BN -> ReLU -> Conv -> Add
+
+phase: phase5
+idea_id: ablation_a_drop_first_preact
+experiment_id: ablation_a
+baseline_preact:
+  model: PreAct-ResNet-20-A
+  best_test_error_pct: 9.47
+  artifact: experiments/runs/phase3/preact_resnet20a/CifarPreActResNet-20-R-A/09_03_2026/16_23_57
+baseline_resnet:
+  model: ResNet-20-A
+  best_test_error_pct: 8.41
+  artifact: experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41
+
+ablation:
+  model: CifarPreActAblationA-20-R-A
+  block: "Conv -> BN -> ReLU -> Conv -> Add"
+  purpose: "verify role of first BN+ReLU in PreAct block"
+  frozen_controls:
+    dataset: CIFAR-10
+    epochs: 160
+    batch_size: 128
+    optimizer: SGD
+    momentum: 0.9
+    weight_decay: 1.0e-4
+    lr: 0.1
+    lr_milestones_iters: [32000, 48000]
+    augmentation: "RandomCrop(32, padding=4) + RandomHorizontalFlip + Normalize"
+    evaluation: "test error every 4 epochs; best.pt by min test error"
+    shortcut: A
+
+cli: "train.py 20 -r -o A --ablation A --output-root <runs/phase5/ablation_a>"
+raw_root: experiments/runs/phase5/ablation_a

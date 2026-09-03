@@ -1,0 +1,13 @@
+{
+  "arch": "CifarPreActResNet",
+  "depth": 20,
+  "residual": true,
+  "option": "A",
+  "preact": true,
+  "epochs": 1,
+  "param_count": 270314,
+  "best_test_error": 0.5152000000000001,
+  "best_test_error_pct": 51.52,
+  "best_epoch": 0,
+  "artifact_root": "C:\\Work\\Papers\\AI-Research-Demo\\experiments\\runs\\phase3\\preact_resnet20a\\CifarPreActResNet-20-R-A\\09_03_2026\\16_16_32"
+}

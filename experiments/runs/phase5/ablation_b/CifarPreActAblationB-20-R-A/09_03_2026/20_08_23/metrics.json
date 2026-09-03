@@ -1,0 +1,18 @@
+{
+  "arch": "CifarPreActAblationB",
+  "depth": 20,
+  "residual": true,
+  "option": "A",
+  "preact": true,
+  "ablation": "B",
+  "status": "failed",
+  "failure_mode": "numerical_instability",
+  "epochs_recorded": 21,
+  "last_completed_epoch": 20,
+  "first_nan_epoch": 0,
+  "param_count": 269642,
+  "artifact_root": "C:\\Work\\Papers\\AI-Research-Demo\\experiments\\runs\\phase5\\ablation_b\\CifarPreActAblationB-20-R-A\\09_03_2026\\20_08_23",
+  "best_test_error_pct": null,
+  "best_epoch": null,
+  "note": "failed run; not a valid comparison metric"
+}

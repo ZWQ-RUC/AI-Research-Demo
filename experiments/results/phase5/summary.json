@@ -1,0 +1,117 @@
+{
+  "phase": "phase5",
+  "name": "preact_ablation_final_summary",
+  "language": "zh-CN",
+  "retrain": false,
+  "no_new_training": true,
+  "no_modification_of_raw_results": true,
+  "models": [
+    {
+      "display_name": "Plain-20",
+      "phase": "phase2",
+      "status": "completed",
+      "block": "Conv -> BN -> ReLU -> Conv -> BN -> Add -> ReLU (no shortcut)",
+      "artifact_root": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22",
+      "param_count": 270410,
+      "duration": "01:04:19",
+      "best_test_error_pct": 9.68,
+      "best_epoch": 132,
+      "train_error_at_best_pct": 1.39,
+      "final_train_error_pct": 1.16,
+      "last_test_error_pct": 9.84
+    },
+    {
+      "display_name": "ResNet-20-A",
+      "phase": "phase2",
+      "status": "completed",
+      "block": "Conv -> BN -> ReLU -> Conv -> BN -> Add -> ReLU",
+      "artifact_root": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41",
+      "param_count": 270410,
+      "duration": "01:03:13",
+      "best_test_error_pct": 8.41,
+      "best_epoch": 132,
+      "train_error_at_best_pct": 0.91,
+      "final_train_error_pct": 0.72,
+      "last_test_error_pct": 8.58
+    },
+    {
+      "display_name": "PreAct-ResNet-20-A",
+      "phase": "phase3",
+      "status": "completed",
+      "block": "BN -> ReLU -> Conv -> BN -> ReLU -> Conv -> Add",
+      "artifact_root": "experiments/runs/phase3/preact_resnet20a/CifarPreActResNet-20-R-A/09_03_2026/16_23_57",
+      "param_count": 270314,
+      "duration": "01:11:17",
+      "best_test_error_pct": 9.47,
+      "best_epoch": 128,
+      "train_error_at_best_pct": 1.81,
+      "final_train_error_pct": 1.45,
+      "last_test_error_pct": 9.76
+    },
+    {
+      "display_name": "Ablation-A",
+      "phase": "phase5",
+      "status": "completed",
+      "block": "Conv -> BN -> ReLU -> Conv -> Add",
+      "artifact_root": "experiments/runs/phase5/ablation_a/CifarPreActAblationA-20-R-A/09_03_2026/18_59_29",
+      "param_count": 269738,
+      "duration": "01:08:53",
+      "note": "去掉完整 PreAct 的第一段 BN+ReLU",
+      "best_test_error_pct": 8.32,
+      "best_epoch": 124,
+      "train_error_at_best_pct": 1.24,
+      "final_train_error_pct": 0.9,
+      "last_test_error_pct": 8.43
+    },
+    {
+      "display_name": "Ablation-B",
+      "phase": "phase5",
+      "status": "failed",
+      "failure_mode": "numerical_instability",
+      "block": "BN -> ReLU -> Conv -> Conv -> Add",
+      "artifact_root": "experiments/runs/phase5/ablation_b/CifarPreActAblationB-20-R-A/09_03_2026/20_08_23",
+      "param_count": 269642,
+      "duration": "stopped ~epoch 20",
+      "note": "去掉完整 PreAct 的第二段 BN+ReLU；从 epoch 0 起 NaN",
+      "best_test_error_pct": null,
+      "best_epoch": null,
+      "last_completed_epoch": 20,
+      "first_nan_epoch": 0,
+      "train_error_at_best_pct": null,
+      "final_train_error_pct": null
+    }
+  ],
+  "deltas_pp": {
+    "preact_minus_resnet20a": 1.06,
+    "ablation_a_minus_resnet20a": -0.09,
+    "ablation_a_minus_preact": -1.15,
+    "ablation_b": null
+  },
+  "ranking_completed_only": [
+    {"rank": 1, "model": "Ablation-A", "best_test_error_pct": 8.32},
+    {"rank": 2, "model": "ResNet-20-A", "best_test_error_pct": 8.41},
+    {"rank": 3, "model": "PreAct-ResNet-20-A", "best_test_error_pct": 9.47},
+    {"rank": 4, "model": "Plain-20", "best_test_error_pct": 9.68}
+  ],
+  "ablation_b": {
+    "status": "failed",
+    "failure_mode": "numerical_instability",
+    "comparable_accuracy": false
+  },
+  "answers": {
+    "why_preact_no_gain": "在相同后激活配方与深度-20、单次运行下，完整 PreAct 相对 ResNet-20-A 更差（+1.06 pp）；最佳点训练误差更高（1.81% vs 0.91%），存在 underfit；文献中 PreAct 收益更常见于更深网络，不能推出普遍更差。",
+    "why_ablation_a_832": "去掉第一段 BN+ReLU 得到混合残差单元，训练稳定且显著优于完整 PreAct（−1.15 pp）；相对 ResNet-20-A 仅 −0.09 pp，属单次噪声范围，不能宣称稳健超越。",
+    "why_ablation_b_nan": "去掉第二段 BN 后形成 Conv-Conv 直连，在 lr=0.1 下数值爆炸；从 epoch 0 起 train loss 为 NaN，属结构+配方导致的不稳定性，非有效精度结果。",
+    "ablation_implications": "第一段 PreAct 在本浅层设置下可缺甚至有害；第二段 BN+ReLU 对可训性关键。完整 PreAct 不是 ResNet-20 上的免费升级。",
+    "supported_vs_not": "能支持：残差优于 plain；完整 PreAct 非 drop-in 增益；A 具竞争力；B 按当前配方不可训。不能支持：PreAct 普遍排名；A 显著优于 ResNet；把 B 当精度基线；多 seed 显著性。"
+  },
+  "figures": [
+    "experiments/results/phase5/figures/best_test_error_completed.png"
+  ],
+  "sources": {
+    "phase2_manifest": "experiments/manifests/phase2_baseline.json",
+    "phase4_comparison": "experiments/results/phase4/comparison.json",
+    "ablation_a_metrics": "experiments/runs/phase5/ablation_a/CifarPreActAblationA-20-R-A/09_03_2026/18_59_29/metrics.json",
+    "ablation_b_status": "experiments/runs/phase5/ablation_b/CifarPreActAblationB-20-R-A/09_03_2026/20_08_23/status.json"
+  }
+}

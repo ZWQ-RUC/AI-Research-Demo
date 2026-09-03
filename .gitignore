@@ -3,24 +3,41 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Virtual environments
+# Virtual environments / package caches
 .venv/
 venv/
 env/
+**/.venv/
+**/.uv-cache/
 
-# Logs
+# Logs (raw stdout; keep manifests/results instead)
 *.log
 
-# Model checkpoints
+# Model checkpoints (raw)
 *.pt
 *.pth
 *.ckpt
 *.bin
 *.safetensors
 
-# Large datasets
+# TensorBoard / accidental trainer runs under code tree only
+# (do NOT use **/runs/ — that would ignore experiments/runs/)
+code/**/runs/
+
+# Large datasets and derived image dumps
 data/raw/
 data/processed/
+data/cifar-10-batches-py/
+data/cifar10_images/
+
+# Raw run internals under experiments/runs (metrics.json / status.json may still be added selectively)
+experiments/runs/**/checkpoints/
+experiments/runs/**/weights/
+experiments/runs/**/*.pt
+experiments/runs/**/*.pth
+experiments/runs/**/*.npy
+experiments/runs/**/*.log
+experiments/runs/**/train.log
 
 # OS files
 .DS_Store
