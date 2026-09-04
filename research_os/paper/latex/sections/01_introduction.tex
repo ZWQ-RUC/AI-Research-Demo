@@ -1,0 +1,61 @@
+\section{Introduction}
+\label{sec:intro}
+
+% NeurIPS-style opening. Aligns with Conclusion claims C1--scope; macros only for headlines.
+% Citations: He2016DeepResidual, He2016IdentityMappings (verified in references.bib).
+% No mechanistic ``why PreAct failed'' discussion (deferred to Section~\ref{sec:discussion}).
+% No new experiments; no unverified literature.
+
+Residual networks are a central architecture family for deep visual recognition:
+identity shortcuts reformulate stacked layers as residual functions and are widely used to
+train deeper convolutional models~\citep{He2016DeepResidual}.
+Follow-on work further revisits residual-unit design---notably pre-activation
+layouts---arguing that block structure can affect optimization and
+generalization~\citep{He2016IdentityMappings}.
+At the same time, the practical effect of an architecture modification is not fully
+separable from the training recipe under which it is evaluated: dataset protocol,
+depth, shortcut option, optimizer, and schedule jointly define the comparison.
+
+This paper studies a narrowly scoped controlled question rather than a universal ranking of
+architectures.
+On CIFAR-10, at depth~20 with shortcut Option~A, and under a \emph{frozen} training recipe
+matched to a post-activation ResNet-20-A baseline, does replacing the post-activation residual
+block by a full pre-activation residual block reduce best test error?
+We do \emph{not} ask for a global ranking of pre-activation residual networks versus ResNets,
+nor which family is preferable across datasets, depths, or retuned schedules.
+
+Our experimental path is deliberately incremental and fixed-protocol.
+We first compare Plain-20 (no residual shortcut) to ResNet-20-A to establish residual learning
+under the shared CIFAR-10 recipe; we then evaluate PreAct-ResNet-20-A as a drop-in residual-unit
+replacement; finally, we run targeted ablations A/B that remove successive BN+ReLU stages of
+the pre-activation unit (Sections~\ref{sec:method}--\ref{sec:setup}).
+Dataset, depth, Option~A, and the baseline training recipe remain frozen across the
+improvement and ablation comparisons.
+All headline runs are single-seed, which limits statistical strength
+(Section~\ref{sec:limitations}).
+
+Under this protocol, ResNet-20-A improves over Plain-20
+($\ErrResNet\%$ vs.\ $\ErrPlain\%$ best test error; $\ResidualAdvantagePP$\,pp).
+Full PreAct-ResNet-20-A reaches $\ErrPreAct\%$
+($\DeltaPreActMinusResNet$\,pp higher error than ResNet-20-A):
+\textbf{the hypothesized improvement was not supported under the frozen training recipe and
+single-seed setting.}
+Ablation~A attains $\ErrAblationA\%$, better than complete PreAct by
+$\DeltaAblationAVsPreAct$\,pp in magnitude, yet only
+$\DeltaAblationAMinusResNet$\,pp from the ResNet-20-A baseline---a small single-run gap that we
+do not treat as a validated improvement.
+Ablation~B fails with numerical instability (\AblationBStatus) and is not used as an accuracy
+baseline.
+These observations do not establish that pre-activation residual units are generally inferior
+outside this recipe and scope.
+
+\textbf{Contributions.}
+We provide (i)~an artifact-backed, protocol-controlled comparison of Plain-20, ResNet-20-A, and
+PreAct-ResNet-20-A under one frozen CIFAR-10 depth-20 Option~A recipe (single-run artifacts);
+(ii)~an empirical negative result for the drop-in PreAct improvement hypothesis under that
+clearly specified protocol;
+(iii)~targeted BN+ReLU ablations that narrow how the negative result can be interpreted; and
+(iv)~explicit evidence boundaries and reproducibility limitations (single-seed; no retuned
+PreAct schedule; no claim of proposing a new architecture family or leaderboard-topping
+accuracy).
+% End Introduction.

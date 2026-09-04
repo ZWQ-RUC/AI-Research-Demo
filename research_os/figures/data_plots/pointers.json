@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "mode": "read_only_pointer",
+  "status": "inherited_partial",
+  "note": "Pointers to existing plot files. Authority for numbers remains experiments/results/. paper/figures are display copies via sync_paper.py.",
+  "authority_roots": [
+    "experiments/results/phase2/figures/",
+    "experiments/results/phase4/figures/",
+    "experiments/results/phase5/figures/"
+  ],
+  "display_copies": [
+    "paper/figures/"
+  ],
+  "plots": [
+    {
+      "id": "phase2_plain_vs_residual",
+      "path": "experiments/results/phase2/figures/plain_vs_residual.png",
+      "display_copy": "paper/figures/phase2_plain_vs_residual.png"
+    },
+    {
+      "id": "phase2_side_by_side",
+      "path": "experiments/results/phase2/figures/side_by_side.png",
+      "display_copy": "paper/figures/phase2_side_by_side.png"
+    },
+    {
+      "id": "phase4_best_test_error_bar",
+      "path": "experiments/results/phase4/figures/best_test_error_bar.png",
+      "display_copy": "paper/figures/phase4_best_test_error_bar.png"
+    },
+    {
+      "id": "phase4_loss_curves",
+      "path": "experiments/results/phase4/figures/loss_curves.png",
+      "display_copy": "paper/figures/phase4_loss_curves.png"
+    },
+    {
+      "id": "phase4_test_error_curves",
+      "path": "experiments/results/phase4/figures/test_error_curves.png",
+      "display_copy": "paper/figures/phase4_test_error_curves.png"
+    },
+    {
+      "id": "phase4_train_error_curves",
+      "path": "experiments/results/phase4/figures/train_error_curves.png",
+      "display_copy": "paper/figures/phase4_train_error_curves.png"
+    },
+    {
+      "id": "phase5_best_test_error",
+      "path": "experiments/results/phase5/figures/best_test_error_completed.png",
+      "display_copy": "paper/figures/phase5_best_test_error.png"
+    }
+  ],
+  "tables": [
+    "experiments/results/phase2/metrics.csv",
+    "experiments/results/phase4/comparison.csv",
+    "experiments/results/phase5/comparison.csv",
+    "paper/tables/phase2_metrics.csv",
+    "paper/tables/phase4_comparison.csv",
+    "paper/tables/phase5_comparison.csv"
+  ]
+}

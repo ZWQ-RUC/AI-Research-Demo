@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "note": "Statuses use inherited/imported/waived — never forged completed for historical work unless explicitly decided.",
+  "updated_at_utc": "2026-09-04T01:43:00Z",
+  "decisions_ref": "decisions/D1-D5_2026-09-04.md",
+  "phases": {
+    "0": {
+      "name": "Intake / State Detect",
+      "status": "completed",
+      "evidence": [
+        "research_os/state.json",
+        "research_os/log.md"
+      ]
+    },
+    "1": {
+      "name": "Research Contract",
+      "status": "imported",
+      "pointer": "contract/research-question-card.md",
+      "gate": "G1_approved",
+      "decision": "D1=A",
+      "g1_approved_at_utc": "2026-09-04T01:52:00Z"
+    },
+    "2": {
+      "name": "Literature Ops",
+      "status": "waived_for_demo",
+      "pointer": "literature/STATUS.md",
+      "decision": "D2=A"
+    },
+    "3": {
+      "name": "Knowledge Base",
+      "status": "waived_for_demo",
+      "pointer": "vault/STATUS.md",
+      "decision": "D2=A"
+    },
+    "4": {
+      "name": "Reproduction Lane",
+      "status": "inherited",
+      "pointer": "engineering/runs.json#baseline",
+      "reproduction_status": "partially_reproduced"
+    },
+    "5": {
+      "name": "Experiment Lane",
+      "status": "inherited",
+      "pointer": "engineering/runs.json#innovation+ablation",
+      "gate_G3": "approved",
+      "decision": "D4=B"
+    },
+    "6": {
+      "name": "Evidence Visuals",
+      "status": "inherited_partial",
+      "pointer": "figures/data_plots/pointers.json",
+      "framework_prompts": "absent_non_blocking",
+      "decision": "D3=A"
+    },
+    "7": {
+      "name": "Paper Production",
+      "status": "in_progress",
+      "substage": "paper_data_pipeline_ready_paused_before_body",
+      "decision": "D5=A",
+      "sync": "1C_2A_3A",
+      "gate_G4": "pending",
+      "no_body_writing_yet": true
+    },
+    "8": {
+      "name": "Finalize / Publish",
+      "status": "not_started"
+    }
+  }
+}

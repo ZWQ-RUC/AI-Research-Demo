@@ -1,0 +1,66 @@
+\section{Related Work}
+\label{sec:related}
+
+% Citation-safe Related Work.
+% Verified BibTeX keys only: He2016DeepResidual, He2016IdentityMappings
+% (arXiv API + Crossref DOIs; project README / paper_summary pointers).
+% ResearchVault Analytical Notes: not available (Phase 2/3 waived_for_demo).
+% Broader architecture--recipe literature beyond these two sources: [NEEDS_VERIFICATION].
+% No results from this study; no invented citations.
+
+\subsection{Residual Learning}
+\label{sec:rw-residual}
+
+Residual learning reformulates stacked layers as learning residual functions with respect
+to layer inputs, rather than unreferenced mappings~\citep{He2016DeepResidual}.
+Empirically, networks with identity shortcuts are reported to be easier to optimize than
+plain counterparts of comparable depth, and residual nets are evaluated on large-scale
+recognition benchmarks as well as on CIFAR-10 depth studies in the original
+work~\citep{He2016DeepResidual}.
+The CIFAR residual family uses a $6n{+}2$ stage layout with optional projection shortcuts
+(Options~A/B); our study adopts this residual-learning framing as background, without
+expanding into ImageNet-scale architectures beyond what that paper already reports.
+
+\subsection{Pre-activation Residual Networks}
+\label{sec:rw-preact}
+
+A subsequent analysis of residual units emphasizes identity mappings on the skip path and
+the role of after-addition activation in signal propagation~\citep{He2016IdentityMappings}.
+That line of work motivates a \emph{pre-activation} residual unit in which batch
+normalization and ReLU precede the convolutional transforms
+($\mathrm{BN}{\rightarrow}\mathrm{ReLU}{\rightarrow}\mathrm{Conv}$ on the residual branch),
+in contrast to the original \emph{post-activation} ordering where convolutions come first and
+a nonlinearity is applied after the residual addition~\citep{He2016DeepResidual,He2016IdentityMappings}.
+The pre-activation redesign is presented as improving trainability and generalization in the
+settings studied by~\citet{He2016IdentityMappings}; we treat those claims as the source
+hypothesis space for a controlled drop-in test, not as a literature consensus that every
+post-activation CIFAR recipe must benefit from an untuned replacement.
+
+\subsection{Architectural Variants and Training Recipes}
+\label{sec:rw-recipes}
+
+Both foundational papers introduce residual units together with concrete optimization
+protocols (optimizer, schedule, data augmentation, and evaluation
+settings)~\citep{He2016DeepResidual,He2016IdentityMappings}.
+In particular,~\citet{He2016IdentityMappings} study how residual-block design choices
+interact with forward/backward propagation and report ablation-style comparisons among unit
+variants under their training setups.
+This background supports reading block redesign and training procedure as coupled
+experimental factors rather than as fully separable claims.
+A broader survey of how later residual variants, normalizers, or modern training recipes
+co-adapt with architecture is outside the verified bibliography of this draft
+{[NEEDS\_VERIFICATION]}.
+
+\subsection{Positioning of This Study}
+\label{sec:rw-position}
+
+This paper does not propose a new general-purpose network family.
+It is a controlled empirical study on CIFAR-10 depth~20 with shortcut Option~A:
+establish a frozen post-activation ResNet-20-A baseline under a fixed training recipe,
+test a full pre-activation residual-unit replacement under that same recipe, and run
+targeted ablations of the pre-activation BN+ReLU placement.
+The research question and experimental boundary are therefore narrow by design---architecture
+change under a frozen baseline protocol---and should not be read as a comprehensive
+re-evaluation of pre-activation residual networks across datasets, depths, or retuned
+schedules.
+% End Related Work.

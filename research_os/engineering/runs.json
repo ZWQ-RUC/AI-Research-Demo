@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "mode": "read_only_pointer",
+  "note": "Pointers only. Do not copy/move/modify original experiment artifacts. Canonical numbers live under experiments/manifests and experiments/results.",
+  "project_root": "C:\\Work\\Papers\\AI-Research-Demo",
+  "git_head_at_registration": "cc8cb5c60177047e910304c48fb965f6a92816ea",
+  "registered_at_utc": "2026-09-04T01:35:00Z",
+  "authority": {
+    "numbers": [
+      "experiments/manifests/",
+      "experiments/results/"
+    ],
+    "not_authority": [
+      "code/",
+      "paper/figures/",
+      "paper/tables/",
+      "paper/metrics/"
+    ]
+  },
+  "demo_to_research_os": {
+    "demo_phase2_baseline": "research_os_phase_4_reproduction",
+    "demo_phase3_preact": "research_os_phase_5_experiment",
+    "demo_phase4_comparison": "research_os_phase_5_analysis",
+    "demo_phase5_ablation": "research_os_phase_5_experiment",
+    "demo_phase6_evidence_base": "research_os_phase_5_analysis_materials"
+  },
+  "baseline": {
+    "research_os_phase": 4,
+    "status": "inherited",
+    "reproduction_status": "partially_reproduced",
+    "manifest": "experiments/manifests/phase2_baseline.json",
+    "results": "experiments/results/phase2/summary.json",
+    "research_pack": "research/resnet-cifar10-baseline-20260902/",
+    "reproduction_report": "research/resnet-cifar10-baseline-20260902/reproduction_report.md",
+    "frozen": true,
+    "canonical_runs": [
+      {
+        "run_id": "plain20_08_49_22",
+        "path": "experiments/runs/phase2/baseline/CifarResNet-20-P-N/09_03_2026/08_49_22",
+        "best_test_error_pct": 9.68
+      },
+      {
+        "run_id": "resnet20a_09_53_41",
+        "path": "experiments/runs/phase2/baseline/CifarResNet-20-R-A/09_03_2026/09_53_41",
+        "best_test_error_pct": 8.41
+      }
+    ]
+  },
+  "innovation": {
+    "research_os_phase": 5,
+    "status": "inherited",
+    "design": "research/phase3-improvement-research-design/PHASE_3_RESEARCH_DESIGN.md",
+    "design_early_draft": "research/phase3-improvement-design/PHASE_3_RESEARCH_DESIGN.md",
+    "config": "experiments/configs/phase3/preact_resnet20a.yaml",
+    "canonical_run_note": "Three PreAct runs exist; project docs designate final complete 160-epoch run 16_23_57 as canonical.",
+    "canonical_run": "experiments/runs/phase3/preact_resnet20a/CifarPreActResNet-20-R-A/09_03_2026/16_23_57",
+    "comparison_readonly": "experiments/results/phase4/comparison.json"
+  },
+  "ablation": {
+    "research_os_phase": 5,
+    "status": "inherited",
+    "configs": [
+      "experiments/configs/phase5/ablation_a.yaml",
+      "experiments/configs/phase5/ablation_b.yaml"
+    ],
+    "results": "experiments/results/phase5/summary.json",
+    "runs_roots": [
+      "experiments/runs/phase5/ablation_a/",
+      "experiments/runs/phase5/ablation_b/"
+    ]
+  }
+}

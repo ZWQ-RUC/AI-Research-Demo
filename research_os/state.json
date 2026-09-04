@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "orchestrator": "research-os-orchestrator",
+  "project_root": "C:\\Work\\Papers\\AI-Research-Demo",
+  "research_os_dir": "research_os",
+  "current_phase": 7,
+  "last_completed_phase": 6,
+  "suggested_phase": 7,
+  "status": "blocked_pending_user",
+  "phase7_substage": "latex_engineering_ready_overleaf_manual_compile",
+  "pending_gate": "OVERLEAF_COMPILE_CONFIRM",
+  "blocked_reason": "Paper engineering initialized under research_os/paper/latex/. Local TeX absent; compile on Overleaf. Structural verify OK. Awaiting user Overleaf compile confirmation. No manuscript body.",
+  "pipeline_opt_in": false,
+  "ml_writing_default": true,
+  "approvals": {
+    "G1_research_contract": true,
+    "G2_literature_ingest": false,
+    "G3_improvement_design": true,
+    "G4_scientific_conclusion": true,
+    "G5_figure_semantics": false,
+    "G6_review_or_submit": false,
+    "G7_compute_budget": false
+  },
+  "sync_decisions": {
+    "overleaf": "1C_deferred_auto_sync__manual_upload_ok",
+    "canonical": "2A_explicit_snapshot",
+    "scripts_dir": "3A_research_os_paper_scripts",
+    "compile_target": "overleaf_pdflatex"
+  },
+  "template_analysis": {
+    "report": "research_os/paper/template_comparison.md",
+    "chosen": "NeurIPS_2026_Template",
+    "chosen_path": "C:\\Work\\Papers\\Templates\\NeurIPS_2026_Template",
+    "project_initialized": true,
+    "project_dir": "research_os/paper/latex/",
+    "templates_modified": false
+  },
+  "pointers": {
+    "main_tex": "research_os/paper/latex/main.tex",
+    "overleaf_guide": "research_os/paper/latex/OVERLEAF.md",
+    "canonical_data": "research_os/paper/canonical/data.json",
+    "g4_review": "research_os/paper/g4_scientific_conclusion_review.md",
+    "verify_structure": "research_os/paper/scripts/verify_latex_structure.py"
+  },
+  "updated_at": "2026-09-04T04:42:00Z",
+  "notes": [
+    "Latex engineering complete for Overleaf manual upload; no local pdflatex; no body writing."
+  ]
+}

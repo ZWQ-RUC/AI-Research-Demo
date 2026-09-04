@@ -1,0 +1,142 @@
+\section{Discussion}
+\label{sec:discussion}
+
+% Evidence map: paper/analysis.md (Observed/Inferred/Speculative); paper/conclusion.md;
+% canonical macros; Results (Sec.~\ref{sec:results}). No new experiments. No invented citations.
+
+We revisit the research question under the frozen CIFAR-10 protocol of
+Section~\ref{sec:setup}:
+whether replacing the ResNet-20-A post-activation residual block by a full
+pre-activation unit reduces best test error.
+Throughout, we separate \emph{observed evidence} (what the recorded runs show),
+\emph{interpretation} (what those outcomes suggest in context),
+\emph{hypothesis} (plausible mechanisms that remain unproven),
+and \emph{unsupported causal claims} (statements not licensed by the present design).
+
+\subsection{What the Baseline Establishes}
+\label{sec:disc-baseline}
+
+\paragraph{Observed.}
+Under the shared recipe, ResNet-20-A attains best test error $\ErrResNet\%$,
+whereas Plain-20 attains $\ErrPlain\%$
+(Section~\ref{sec:results-residual}; Table~\ref{tab:main-results}).
+The residual model is lower by $\ResidualAdvantagePP$ percentage points
+($\DeltaResNetMinusPlain$\,pp for ResNet $-$ Plain).
+
+\paragraph{Interpretation.}
+Within this depth-20, single-seed CIFAR-10 setting, the residual shortcut is associated
+with a clear reduction in best test error relative to the matched plain network.
+This supports treating ResNet-20-A as a usable frozen control for subsequent architecture
+substitutions, rather than as an under-implemented baseline.
+
+\paragraph{Unsupported causal claim.}
+These two runs do not by themselves prove residual learning is universally beneficial
+beyond the tested depth, dataset, and recipe, nor do they identify which shortcut
+implementation details are necessary for the observed gap.
+
+\subsection{Why the Pre-activation Replacement Did Not Improve the Baseline}
+\label{sec:disc-preact}
+
+\paragraph{Observed.}
+Full PreAct-ResNet-20-A reaches $\ErrPreAct\%$ best test error, which is
+$\DeltaPreActMinusResNet$ percentage points \emph{higher} than ResNet-20-A
+(Section~\ref{sec:results-preact}).
+The preset improvement hypothesis required a reduction of at least $0.30$\,pp
+relative to the frozen control; that threshold was not met
+(Section~\ref{sec:setup}; Phase~3 design record summarized in \texttt{paper/conclusion.md}).
+
+\paragraph{Interpretation.}
+The substitution is an architecture change that also relocates BN and ReLU relative to
+convolution, while the training recipe (learning rate, milestones, epochs, augmentation,
+Option~A, depth) remains the post-activation baseline recipe.
+Therefore the negative outcome is evidence about
+\textbf{pre-activation as a drop-in replacement under the frozen recipe},
+not evidence that pre-activation is intrinsically inferior in all training regimes.
+
+\paragraph{Hypothesis (unproven).}
+A plausible account---consistent with, but not proven by, the recorded trajectories---is
+that the frozen schedule is poorly matched to the PreAct unit on this shallow network,
+so that the intended benefit of cleaner identity mappings does not appear as lower test error
+in this single run.
+\texttt{[NEEDS\_VERIFICATION]}: controlled learning-rate / schedule retuning for PreAct
+was not performed in the present evidence bundle.
+
+\paragraph{Unsupported causal claim.}
+We do \emph{not} endorse blanket dismissals of pre-activation residual units
+(for example, claims of intrinsic inferiority across recipes, depths, or datasets).
+No multi-seed estimate, no PreAct-specific hyperparameter search, and no deeper-network
+sweep are available here to support such generalizations.
+
+\subsection{Evidence from the Ablations}
+\label{sec:disc-ablation}
+
+\paragraph{Ablation~A --- observed.}
+Removing the first $\mathrm{BN}{+}\mathrm{ReLU}$ yields $\ErrAblationA\%$ best test error.
+Relative to full PreAct, this is $\DeltaAblationAMinusPreAct$\,pp
+(magnitude $\DeltaAblationAVsPreAct$\,pp).
+Relative to ResNet-20-A, the difference is $\DeltaAblationAMinusResNet$\,pp
+(Section~\ref{sec:results-ablation}).
+
+\paragraph{Ablation~A --- interpretation.}
+The large recovery versus full PreAct indicates that, in this frozen setting, the
+\emph{presence of the first pre-activation stage} co-occurs with the worse PreAct outcome.
+The small gap versus ResNet-20-A is an observed single-seed delta only; it does not license
+claims of a statistically validated improvement over the frozen baseline.
+
+\paragraph{Ablation~A --- hypothesis vs.\ unsupported claim.}
+\emph{Hypothesis:} the first BN+ReLU may be mismatched to the shallow CIFAR-10 depth-20 network when
+trained with the post-activation recipe.
+\emph{Unsupported:} we have not identified a causal pathway (gradients, feature statistics,
+or optimization geometry) that proves why the first stage hurts; no interventional
+experiment beyond this one architectural ablation is recorded.
+
+\paragraph{Ablation~B --- observed.}
+Removing the second $\mathrm{BN}{+}\mathrm{ReLU}$ produced numerical instability
+(status \AblationBStatus) and no comparable best test error
+(Section~\ref{sec:results-ablation}).
+
+\paragraph{Ablation~B --- interpretation.}
+Under the current learning rate $0.1$ recipe, this configuration is not a valid accuracy
+comparator. The failure constrains what can be said about ``accuracy contribution'' of the
+second stage: the present evidence speaks to \emph{trainability under this recipe}, not to a
+ranked test-error effect.
+
+\paragraph{Ablation~B --- unsupported claim and future check.}
+We do \emph{not} conclude that the second BN is universally indispensable for all depths,
+optimizers, or learning rates.
+A natural follow-up is a controlled rescue experiment (for example, lower learning rate or
+warmup) to test whether Ablation~B can become trainable; such a rescue is
+\texttt{[NEEDS\_VERIFICATION]} / future work and is not claimed as completed here.
+
+\subsection{Interpretation of the Negative Result}
+\label{sec:disc-negative}
+
+\paragraph{Hypothesis status.}
+The improvement hypothesis---that full PreAct would strictly reduce best test error relative
+to frozen ResNet-20-A under the shared protocol---is \textbf{not supported} by the recorded
+evidence ($\ErrPreAct\%$ vs.\ $\ErrResNet\%$; $+\DeltaPreActMinusResNet$\,pp).
+
+\paragraph{Proper scope of the negative result.}
+What is supported is a scoped statement:
+\textbf{the hypothesized improvement was not supported under the frozen training recipe and
+single-seed setting.}
+What is \emph{not} supported is any blanket dismissal of pre-activation residual units
+outside that scope.
+
+\subsection{Research Implications}
+\label{sec:disc-implications}
+
+\begin{enumerate}
+  \item \textbf{Architecture and recipe are coupled.}
+  Evaluating a block reordering while freezing the post-activation schedule answers a
+  drop-in question; it does not answer the best attainable PreAct accuracy after retuning.
+  \item \textbf{Negative results shrink the hypothesis space.}
+  Ruling out ``free gain from full PreAct under this recipe'' focuses follow-ups on
+  recipe rescue, multi-seed estimation, and finer ablations, rather than on claiming a
+  universal architectural ranking.
+  \item \textbf{Next experiments should be controlled, not rhetorical.}
+  Priority directions already suggested by the evidence bundle include multi-seed repeats
+  for ResNet-20-A vs.\ Ablation~A, and LR/schedule rescue attempts for PreAct / Ablation~B
+  (\texttt{paper/analysis.md}, \texttt{paper/conclusion.md}).
+  These remain proposals until executed and registered in the experimental SoT.
+\end{enumerate}

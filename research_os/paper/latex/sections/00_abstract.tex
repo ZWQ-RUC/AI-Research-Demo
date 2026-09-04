@@ -1,0 +1,24 @@
+\begin{abstract}
+Residual networks remain a central architecture family for deep visual recognition, but the
+effect of residual-block modifications is best interpreted together with the training recipe
+under which they are evaluated.
+We study a controlled question on CIFAR-10 at depth~20 with shortcut Option~A: under a frozen
+post-activation ResNet-20-A training recipe, does replacing the residual block by a full
+pre-activation unit reduce best test error?
+We compare Plain-20, ResNet-20-A, PreAct-ResNet-20-A, and targeted BN+ReLU ablations~A/B in a
+single-seed, fixed-protocol architecture comparison.
+ResNet-20-A improves over Plain-20 ($\ErrResNet\%$ vs.\ $\ErrPlain\%$ best test error;
+$\ResidualAdvantagePP$\,pp).
+Full PreAct-ResNet-20-A reaches $\ErrPreAct\%$
+($\DeltaPreActMinusResNet$\,pp higher error than ResNet-20-A);
+\textbf{the hypothesized improvement was not supported under the frozen training recipe and
+single-seed setting.}
+Ablation~A ($\ErrAblationA\%$) improves on complete PreAct by $\DeltaAblationAVsPreAct$\,pp in
+magnitude, but differs from ResNet-20-A by only $\DeltaAblationAMinusResNet$\,pp---a small
+single-run gap that we do not treat as a validated improvement.
+Ablation~B fails with numerical instability (\AblationBStatus) and is not used as an accuracy
+baseline.
+These findings do not claim that pre-activation residual units are generally ineffective; they
+provide an artifact-backed, protocol-controlled negative result that narrows the hypothesis space
+and motivates evaluating architecture changes jointly with optimization settings.
+\end{abstract}
