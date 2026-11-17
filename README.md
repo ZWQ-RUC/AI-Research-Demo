@@ -91,19 +91,23 @@
 
 仓库内所有项目均以现代 Web 标准编写，**免打包、免重型依赖安装**，开箱即刻启动。
 
-### 1. 本地一键启动静态服务（推荐）
-在仓库根目录下，你可以使用附带的自动化脚本或随附的标准运行时启动预览：
+### 1. 双击一键极速体验（最推荐）
+无需配置任何 Python、Node 或外部服务器环境：
+- 在 Windows 文件管理器中直接**双击运行 `快速体验.bat`**
+- 系统将自动在您的**系统默认浏览器**中即刻同时开启：
+  1. **作品 I · 瑶琳仙境**：单文件全功能独立运行版 (`yaolin_wonderland_singlefile.html`)
+  2. **作品 II · 山城造物**：重庆 8D 魔幻城市生成器 (`index.html`)
+
+### 2. 本地静态服务启动（可选）
+如果您需要在局域网或其他设备共享访问，可在终端运行：
 
 ```bash
 # 方式 A：利用 Python 自带轻量服务器启动
 python3 -m http.server 8080
 
-# 方式 B：如果你使用 Windows，可直接双击运行
-start_server.bat
+# 方式 B：Linux / macOS 下直接运行脚本
+./start_server.sh
 ```
-浏览器访问：
-- **瑶琳仙境**：`http://localhost:8080/创意作品-琳琅仙境/瑶琳仙境/index.html`
-- **山城造物**：`http://localhost:8080/创意作品-赛博都市/重庆8D城市生成器/index.html`
 
 ### 2. 单文件独立离线运行
 如果你需要将作品单体分发或在无网络环境展示：
@@ -129,7 +133,7 @@ start_server.bat
 AI-Research-Demo/
 ├── README.md                      # 项目总览与艺术/技术架构白皮书（本文件）
 ├── .gitignore                     # Git 忽略规范配置
-├── start_server.bat               # Windows 便捷静态服务启动脚本
+├── 快速体验.bat                   # Windows 双击直接在默认浏览器开启双项目
 ├── start_server.sh                # Linux / macOS 便捷静态服务启动脚本
 │
 ├── 创意作品-琳琅仙境/
