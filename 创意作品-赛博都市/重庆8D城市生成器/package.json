@@ -1,0 +1,11 @@
+{
+  "name": "chongqing-8d-city-forge",
+  "version": "1.0.0",
+  "description": "山城造物 · 重庆 8D 魔幻城市生成器 (对标 OpenAI Showcase Procedural City Generator)",
+  "scripts": {
+    "test": "node scripts/smoke_test.js",
+    "start": "npx serve ."
+  },
+  "keywords": ["chongqing", "procedural-city", "webgl", "threejs", "8d-city"],
+  "license": "MIT"
+}

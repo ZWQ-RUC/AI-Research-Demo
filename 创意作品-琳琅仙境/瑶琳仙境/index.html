@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>瑶琳仙境 · 跟着大黄狗钻进亿万年的溶洞</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="canvas-container">
+    <canvas id="gl-canvas"></canvas>
+  </div>
+  <div class="vignette-overlay"></div>
+
+  <!-- 1. Opening Cover Overlay (Matches 6.png) -->
+  <section id="cover-overlay" aria-label="瑶琳仙境开场页">
+    <div class="cover-badge">桐 庐</div>
+    <h1 class="cover-title">瑶琳仙境</h1>
+    <p class="cover-subtitle">跟着一只大黄狗，钻进亿万年的溶洞</p>
+    <button id="btn-enter-cave" class="cover-enter-btn" type="button">进 洞 探 秘</button>
+    <div class="cover-controls-hint">
+      <div><b>W A S D</b> / 方向键 &nbsp;带着大黄走</div>
+      <div><b>Shift</b> 小跑 &nbsp;·&nbsp; <b>拖动鼠标</b> 环顾 &nbsp;·&nbsp; <b>滚轮</b> 远近</div>
+      <div class="sub-tip">松开手，大黄会自己东闻闻西嗅嗅</div>
+    </div>
+  </section>
+
+  <!-- 2. In-Game Exploration HUD (Matches 7.png, 8.png, 9.png, 10.png) -->
+  <div id="hud-layer" class="hidden">
+    <header class="hud-top-left">
+      <div class="hall-title-row">
+        <span class="hall-red-bar"></span>
+        <h2 id="hud-hall-title" class="hall-title">前 厅 · 江 南 水 乡</h2>
+      </div>
+      <p id="hud-hall-subtitle" class="hall-subtitle">秀丽温婉的小洞厅</p>
+    </header>
+
+    <div id="dog-status-toast" class="dog-status-toast">🐕 大黄正在带路探秘中</div>
+
+    <nav class="hud-top-right" aria-label="溶洞导览工具栏">
+      <div class="toolbar-btns">
+        <button id="btn-auto-guide" class="hud-pill-btn" type="button">
+          <span class="icon">✧</span> 大黄带路
+        </button>
+        <button id="btn-audio" class="hud-pill-btn" type="button">
+          <span class="icon">♪</span> 声音
+        </button>
+        <button id="btn-map" class="hud-pill-btn" type="button">
+          <span class="icon">◈</span> 地图
+        </button>
+        <button id="btn-help" class="hud-pill-btn" type="button">
+          <span class="icon">?</span> 说明
+        </button>
+      </div>
+      <div class="explore-counter">
+        <strong id="hud-visited-count">3</strong> / 18 已探秘
+      </div>
+    </nav>
+
+    <div id="touch-joystick" class="touch-joystick-zone">
+      <div id="touch-joystick-knob" class="touch-joystick-knob"></div>
+    </div>
+
+    <article id="spot-card" class="spot-card" aria-live="polite">
+      <div class="spot-card-header">
+        <span id="spot-badge" class="spot-badge">探秘 3 / 18</span>
+        <div class="spot-nav-mini">
+          <button id="btn-prev-spot" class="spot-step-btn" type="button" title="上一处景观">◀ 上一景</button>
+          <button id="btn-next-spot" class="spot-step-btn" type="button" title="下一处景观">下一景 ▶</button>
+        </div>
+      </div>
+      <h3 id="spot-title" class="spot-title">前厅 · 江南水乡</h3>
+      <p id="spot-desc" class="spot-desc">前厅不大，清水一汪一汪地卧在石间，秀丽温婉，像极了江南水乡。</p>
+    </article>
+
+    <aside id="minimap-card" class="minimap-card" title="点击游线图任意位置可快速前往对应洞厅景观">
+      <canvas id="minimap-canvas" width="220" height="420"></canvas>
+      <div class="minimap-caption">游线图 · 洞口在下</div>
+    </aside>
+  </div>
+
+  <!-- 3. Help & 18 Scenic Spots Directory Modal -->
+  <div id="help-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3 id="modal-title-text" class="modal-title">桐庐 · 瑶琳仙境溶洞探秘指南</h3>
+        <button id="btn-close-modal" class="modal-close-btn" type="button" aria-label="关闭窗口">✕</button>
+      </div>
+      <p style="font-size: 13.5px; line-height: 1.7; color: rgba(232,222,204,0.86);">
+        瑶琳仙境位于浙江杭州桐庐县，纵深约 1 公里，总面积达 28000 平方米，被誉为“全国诸洞之冠”。全场景与中华田园犬“大黄”均由纯代码程序化实时生成，无任何外部 3D 模型或贴图文件。
+      </p>
+      <h4 class="modal-section-title">操作方式</h4>
+      <div class="controls-grid">
+        <div class="control-item"><strong>W A S D / 方向键</strong>控制大黄在溶洞内漫步穿梭</div>
+        <div class="control-item"><strong>按住 Shift</strong>带着大黄欢快小跑</div>
+        <div class="control-item"><strong>鼠标拖拽 / 滚轮</strong>360° 环顾洞厅奇观与缩放视距</div>
+        <div class="control-item"><strong>松开按键 / 大黄带路</strong>大黄会自动低头东闻闻西嗅嗅，或自动巡游全洞</div>
+      </div>
+      <h4 class="modal-section-title">瑶琳十八景快速寻访（点击即可瞬间前往）</h4>
+      <div id="modal-spots-grid" class="spots-grid"></div>
+    </div>
+  </div>
+
+  <script src="js/noise.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/spots.js"></script>
+  <script src="js/dog.js"></script>
+  <script src="js/cave.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
