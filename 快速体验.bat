@@ -1,45 +1,53 @@
 @echo off
-rem 双击本文件即可在默认浏览器中打开两个 3D 创意作品
-rem 注意：本文件必须保存为 ANSI/GBK 编码、CRLF 换行、且不能带 BOM
+rem ============================================================
+rem  Quick demo launcher for the 3D creative works.
+rem  Double-click this file to open both project pages in the
+rem  default browser.
+rem
+rem  IMPORTANT - keep this file pure ASCII / English only.
+rem  The project folders have Chinese names; typing them here
+rem  breaks after git line-ending conversion, editor re-saving
+rem  or code page changes (e.g. 65001). So the paths are NOT
+rem  hard-coded: they are located at run time by their ASCII
+rem  file names, which works in any extracted folder.
+rem ============================================================
 setlocal
-chcp 936 >nul
 cd /d "%~dp0"
-title 3D 创意作品体验
+title 3D Creative Works - Quick Demo
 
-set "FILE1=%~dp0创意作品-琳琅仙境\瑶琳仙境\yaolin_wonderland_singlefile.html"
-set "FILE2=%~dp0创意作品-赛博都市\重庆8D城市生成器\index.html"
+set "FILE1="
+set "FILE2="
 
-echo ========================================
-echo       3D 创意作品集 - 快速体验
-echo ========================================
+rem 1) Wonderland project: the single-file page, unique ASCII name
+for /r "%~dp0" %%f in (yaolin_wonderland_singlefile.html) do if exist "%%f" if not defined FILE1 set "FILE1=%%f"
+
+rem 2) City project: the index.html that sits next to package.json
+for /r "%~dp0" %%f in (index.html) do if exist "%%f" if exist "%%~dpfpackage.json" set "FILE2=%%f"
+
+echo ============================================================
+echo    3D Creative Works - Quick Demo
+echo ============================================================
 echo.
 
-echo [1/2] 正在打开「瑶琳仙境 · 3D 溶洞探秘」...
-if not exist "%FILE1%" goto MISSING1
-start "" "%FILE1%"
-
-echo [2/2] 正在打开「山城造物 · 重庆 8D 城市生成器」...
-if not exist "%FILE2%" goto MISSING2
-start "" "%FILE2%"
-
+echo [1/2] Opening the wonderland cave project...
+if defined FILE1 echo         %FILE1%
+if not defined FILE1 echo         [ERROR] yaolin_wonderland_singlefile.html not found.
+if defined FILE1 start "" "%FILE1%"
 echo.
-echo 启动完成！已在默认浏览器中打开两个作品的页面。
-echo 本窗口可以直接关闭。
-echo.
-ping -n 6 127.0.0.1 >nul
-exit /b 0
 
-:MISSING1
-echo [错误] 找不到文件：%FILE1%
-goto ERROR
-
-:MISSING2
-echo [错误] 找不到文件：%FILE2%
-goto ERROR
-
-:ERROR
+echo [2/2] Opening the Chongqing 8D city generator...
+if defined FILE2 echo         %FILE2%
+if not defined FILE2 echo         [ERROR] index.html (next to package.json) not found.
+if defined FILE2 start "" "%FILE2%"
 echo.
-echo 请确认本文件与「创意作品-琳琅仙境」「创意作品-赛博都市」两个文件夹位于同一目录。
-echo.
-pause
-exit /b 1
+
+set "OK=1"
+if not defined FILE1 set "OK="
+if not defined FILE2 set "OK="
+if defined OK echo Done! Both pages were sent to your default browser.
+if defined OK echo This window will close automatically.
+if not defined OK echo Something was not found. Please put this .bat file in the
+if not defined OK echo same folder as the two project folders and run it again.
+if not defined OK pause
+if defined OK ping -n 4 127.0.0.1 >nul
+exit /b
